@@ -1,0 +1,1032 @@
+[
+ {
+  "id": "seed-ashlar-drive-collierville",
+  "title": "Ashlar slate driveway, wet-look finish",
+  "service": "stamped-concrete",
+  "surface": "driveway",
+  "pattern": "ashlar-slate",
+  "color": [
+   "charcoal",
+   "slate-grey"
+  ],
+  "finish": [
+   "color-hardener",
+   "antique-release",
+   "sealed-gloss"
+  ],
+  "feature": [
+   "border"
+  ],
+  "description": "Full driveway replacement in ashlar slate with a charcoal hardener and a darker antique release in the joints. Finished with a solvent sealer, which is what gives it the wet look in the photo — that is the sealer, not the colour, and it needs redoing every three years.",
+  "address": "",
+  "city": "Collierville",
+  "state": "TN",
+  "neighborhood": "Bray Station",
+  "year": 2024,
+  "lat": 35.037136,
+  "lng": -89.682251,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/stamped-concrete-driveway-memphis-tn-ashlar-wet-finish.webp"
+   },
+   {
+    "src": "img/stamped-concrete-driveway-memphis-tn-random-stone-border.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-cobble-drive-germantown",
+  "title": "Colonial cobble driveway and garage apron",
+  "service": "stamped-concrete",
+  "surface": "driveway",
+  "pattern": "colonial-cobble",
+  "color": [
+   "sandstone",
+   "walnut"
+  ],
+  "finish": [
+   "color-hardener",
+   "antique-release"
+  ],
+  "feature": [
+   "border"
+  ],
+  "description": "Cobble field with a hand-cut border running the length of the drive and squared off at the apron. The tight radius at the turnaround is stamped, not cut — that is the part that takes the extra day.",
+  "address": "",
+  "city": "Germantown",
+  "state": "TN",
+  "neighborhood": "Farmington",
+  "year": 2023,
+  "lat": 35.093227,
+  "lng": -89.823841,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/stamped-concrete-driveway-memphis-tn-cobblestone-approach.webp"
+   },
+   {
+    "src": "img/stamped-concrete-driveway-memphis-tn-cobblestone-garage-apron.webp"
+   },
+   {
+    "src": "img/colonial-cobble-stamped-driveway-memphis-tn-detail.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-eurofan-drive-eads",
+  "title": "European fan driveway",
+  "service": "stamped-concrete",
+  "surface": "driveway",
+  "pattern": "european-fan",
+  "color": [
+   "harvest-gold",
+   "chestnut"
+  ],
+  "finish": [
+   "color-hardener",
+   "antique-release"
+  ],
+  "feature": [],
+  "description": "European fan is the hardest pattern to keep straight on a long run because the fans have to stay on a line the eye can follow. Gold hardener with a brown release sitting in the joints.",
+  "address": "",
+  "city": "Eads",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2023,
+  "lat": 35.186158,
+  "lng": -89.626117,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/european-fan-stamped-concrete-driveway-memphis-tn.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-dogwood-drive-arlington",
+  "title": "Random stone approach under the dogwoods",
+  "service": "stamped-concrete",
+  "surface": "driveway",
+  "pattern": "random-stone",
+  "color": [
+   "slate-grey",
+   "driftwood"
+  ],
+  "finish": [
+   "color-hardener",
+   "antique-release"
+  ],
+  "feature": [
+   "border"
+  ],
+  "description": "Random stone field with a running-bond border. Root pressure from the trees either side is why this one is thicker than a standard drive and jointed where it is.",
+  "address": "",
+  "city": "Arlington",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2024,
+  "lat": 35.273091,
+  "lng": -89.685725,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/stamped-concrete-driveway-memphis-tn-dogwoods-hero.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-stamped-patio-cordova",
+  "title": "Stamped back patio, adobe and terra cotta",
+  "service": "stamped-concrete",
+  "surface": "patio",
+  "pattern": "ashlar-slate",
+  "color": [
+   "adobe",
+   "terra-cotta"
+  ],
+  "finish": [
+   "integral-color",
+   "antique-release"
+  ],
+  "feature": [],
+  "description": "Integral colour through the slab with a release accent, so a chip shows the same colour rather than grey. Ashlar pattern, squared to the house.",
+  "address": "",
+  "city": "Cordova",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2022,
+  "lat": 35.154403,
+  "lng": -89.796334,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/stamped-concrete-memphis-tn-patio.webp"
+   },
+   {
+    "src": "img/baltz-sons-concrete-memphis-tn-finished-patio.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-seatwall-patio-bartlett",
+  "title": "Stamped patio with a poured seat wall",
+  "service": "stamped-concrete",
+  "surface": "patio",
+  "pattern": "random-stone",
+  "color": [
+   "chestnut",
+   "sandstone"
+  ],
+  "finish": [
+   "color-hardener",
+   "antique-release"
+  ],
+  "feature": [
+   "seat-wall"
+  ],
+  "description": "The seat wall is poured and capped as part of the same job, so the cap colour matches the field instead of being chased later with a stain.",
+  "address": "",
+  "city": "Bartlett",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2023,
+  "lat": 35.227481,
+  "lng": -89.89952,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/stamped-concrete-seat-wall-memphis-tn-stained-patio.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-compass-patio-collierville",
+  "title": "Compass star fire pit patio, hand-cut and stained",
+  "service": "stained-concrete",
+  "surface": "patio",
+  "pattern": "medallion",
+  "color": [
+   "black-granite",
+   "terra-cotta",
+   "harvest-gold"
+  ],
+  "finish": [
+   "acid-stain",
+   "sealed-gloss"
+  ],
+  "feature": [
+   "fire-feature",
+   "logo-inlay",
+   "saw-cut"
+  ],
+  "description": "Compass star cut into the cured slab by hand, then each point stained separately and the field taken down to a black granite. The fire pit is the centre of the star. This is the one to show somebody who thinks concrete is grey.",
+  "address": "",
+  "city": "Collierville",
+  "state": "TN",
+  "neighborhood": "Schilling Farms",
+  "year": 2024,
+  "lat": 35.025318,
+  "lng": -89.657825,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/stained-concrete-patio-memphis-tn-compass-star-firepit.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-sun-medallion-germantown",
+  "title": "Hand-cut sun medallion inlay",
+  "service": "stained-concrete",
+  "surface": "patio",
+  "pattern": "medallion",
+  "color": [
+   "harvest-gold",
+   "terra-cotta",
+   "walnut"
+  ],
+  "finish": [
+   "acid-stain",
+   "sealed-gloss"
+  ],
+  "feature": [
+   "logo-inlay",
+   "saw-cut"
+  ],
+  "description": "Saw-cut medallion stained in three passes, lightest first. Acid stain is a reaction, not a paint — the colour comes out of the concrete, which is why no two of these are identical.",
+  "address": "",
+  "city": "Germantown",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2023,
+  "lat": 35.089452,
+  "lng": -89.818589,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/stained-concrete-sun-medallion-memphis-tn-hand-cut-inlay.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-acid-floor-memphis",
+  "title": "Acid-stained interior floor, Midtown",
+  "service": "stained-concrete",
+  "surface": "interior-floor",
+  "pattern": "",
+  "color": [
+   "walnut",
+   "chestnut"
+  ],
+  "finish": [
+   "acid-stain",
+   "sealed-gloss"
+  ],
+  "feature": [],
+  "description": "Existing slab, ground flat, stained and sealed in place. Half the cost of tearing it out and the variation in the old slab is what makes the finish look like leather.",
+  "address": "",
+  "city": "Memphis",
+  "state": "TN",
+  "neighborhood": "Midtown",
+  "year": 2022,
+  "lat": 35.152316,
+  "lng": -90.054965,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/stained-concrete-memphis-tn-acid-stain.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-terracotta-deck-olive-branch",
+  "title": "Terra cotta banded pool deck",
+  "service": "stained-concrete",
+  "surface": "pool-deck",
+  "pattern": "",
+  "color": [
+   "terra-cotta",
+   "bone-white"
+  ],
+  "finish": [
+   "acid-stain",
+   "sealed-matte"
+  ],
+  "feature": [
+   "border"
+  ],
+  "description": "Banded stain with a light field so the deck stays cool enough to stand on in August. Matte sealer on a pool deck, never gloss — gloss plus water is a slip claim waiting to happen.",
+  "address": "",
+  "city": "Olive Branch",
+  "state": "MS",
+  "neighborhood": "",
+  "year": 2023,
+  "lat": 34.962444,
+  "lng": -89.822718,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/stained-concrete-pool-deck-memphis-tn-terracotta-banded.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-seamless-deck-collierville",
+  "title": "Seamless slate pool deck, grey",
+  "service": "pool-decks",
+  "surface": "pool-deck",
+  "pattern": "seamless-slate",
+  "color": [
+   "slate-grey",
+   "charcoal"
+  ],
+  "finish": [
+   "color-hardener",
+   "antique-release"
+  ],
+  "feature": [],
+  "description": "Seamless texture, so there are no repeating grout lines to line up and nowhere for a pattern error to hide. The most-asked-for finish in the Mid-South right now.",
+  "address": "",
+  "city": "Collierville",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2024,
+  "lat": 35.014833,
+  "lng": -89.638081,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/seamless-slate-stamped-pool-deck-memphis-tn-grey.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-waterfall-deck-lakeland",
+  "title": "Pool deck around a rock waterfall",
+  "service": "pool-decks",
+  "surface": "pool-deck",
+  "pattern": "random-stone",
+  "color": [
+   "driftwood",
+   "slate-grey"
+  ],
+  "finish": [
+   "washed"
+  ],
+  "feature": [
+   "waterfall"
+  ],
+  "description": "Deck poured to the rock rather than the rock set onto the deck, which is the only way the joint between the two does not open up in year three.",
+  "address": "",
+  "city": "Lakeland",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2022,
+  "lat": 35.218059,
+  "lng": -89.761963,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/concrete-pool-deck-memphis-tn-rock-waterfall.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-grass-joint-deck-germantown",
+  "title": "Floating panels with grass joints",
+  "service": "pool-decks",
+  "surface": "pool-deck",
+  "pattern": "",
+  "color": [
+   "platinum"
+  ],
+  "finish": [
+   "smooth-trowel"
+  ],
+  "feature": [
+   "grass-joint"
+  ],
+  "description": "Each panel is its own pour with turf between. It looks like a design choice and it is, but it also means the deck has nowhere to build up stress and crack.",
+  "address": "",
+  "city": "Germantown",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2024,
+  "lat": 35.063578,
+  "lng": -89.802596,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/concrete-pool-deck-memphis-tn-smooth-grey-grass-joints.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-banded-deck-southaven",
+  "title": "Stamped border with washed panels",
+  "service": "pool-decks",
+  "surface": "pool-deck",
+  "pattern": "ashlar-slate",
+  "color": [
+   "bone-white",
+   "slate-grey"
+  ],
+  "finish": [
+   "washed"
+  ],
+  "feature": [
+   "border"
+  ],
+  "description": "Stamped band framing washed panels. Two finishes on one deck is more work than either alone, and it is what stops a big deck reading as a parking lot.",
+  "address": "",
+  "city": "Southaven",
+  "state": "MS",
+  "neighborhood": "",
+  "year": 2023,
+  "lat": 34.997803,
+  "lng": -90.046342,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/concrete-pool-deck-memphis-tn-stamped-border-washed-panels.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-broom-deck-millington",
+  "title": "Broom-finish pool deck",
+  "service": "pool-decks",
+  "surface": "pool-deck",
+  "pattern": "",
+  "color": [
+   "slate-grey"
+  ],
+  "finish": [
+   "broom"
+  ],
+  "feature": [],
+  "description": "Plain broom finish, done properly: flat, drained away from the coping, and jointed so the cracks land where they were told to. Not every deck needs to be decorative.",
+  "address": "",
+  "city": "Millington",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2022,
+  "lat": 35.358731,
+  "lng": -89.887474,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/concrete-pool-deck-memphis-tn-broom-finish.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-freeform-deck-oakland",
+  "title": "Freeform pool, washed aggregate deck",
+  "service": "pool-decks",
+  "surface": "pool-deck",
+  "pattern": "",
+  "color": [
+   "bone-white",
+   "sandstone"
+  ],
+  "finish": [
+   "washed",
+   "exposed-aggregate"
+  ],
+  "feature": [],
+  "description": "Washed finish on a freeform shape, which means every edge is hand-worked. The detail shot is the same deck up close — that texture is the aggregate in the mix, not a coating on top.",
+  "address": "",
+  "city": "Oakland",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2023,
+  "lat": 35.236746,
+  "lng": -89.516018,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/washed-aggregate-pool-deck-memphis-tn-freeform-pool.webp"
+   },
+   {
+    "src": "img/washed-aggregate-concrete-finish-memphis-tn-detail.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-coping-deck-hernando",
+  "title": "Washed deck with grey and white coping",
+  "service": "pool-decks",
+  "surface": "pool-deck",
+  "pattern": "",
+  "color": [
+   "platinum",
+   "bone-white"
+  ],
+  "finish": [
+   "washed"
+  ],
+  "feature": [
+   "border"
+  ],
+  "description": "Coping poured in a lighter mix than the deck so the edge reads as a line. The second photo is a stamped coping detail on the same job.",
+  "address": "",
+  "city": "Hernando",
+  "state": "MS",
+  "neighborhood": "",
+  "year": 2024,
+  "lat": 34.812927,
+  "lng": -89.98595,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/washed-aggregate-pool-deck-memphis-tn-grey-white-coping.webp"
+   },
+   {
+    "src": "img/stamped-concrete-pool-coping-memphis-tn-washed-aggregate-deck.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-swimup-collierville",
+  "title": "Swim-up bar and deck",
+  "service": "outdoor-living",
+  "surface": "pool-deck",
+  "pattern": "",
+  "color": [
+   "sandstone"
+  ],
+  "finish": [
+   "smooth-trowel",
+   "sealed-matte"
+  ],
+  "feature": [
+   "swim-up-bar"
+  ],
+  "description": "Bar top cast to sit just above the waterline with stools poured into the pool floor. Everything below water is a different mix design than everything above it.",
+  "address": "",
+  "city": "Collierville",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2024,
+  "lat": 35.029266,
+  "lng": -89.637403,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/concrete-swim-up-bar-memphis-tn-pool.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-exposed-drive-germantown",
+  "title": "Exposed aggregate driveway with a brick ribbon",
+  "service": "concrete-driveways",
+  "surface": "driveway",
+  "pattern": "",
+  "color": [
+   "bone-white",
+   "brick-red"
+  ],
+  "finish": [
+   "exposed-aggregate"
+  ],
+  "feature": [
+   "border"
+  ],
+  "description": "Exposed aggregate field with a real brick ribbon, not a stamped one. Washed at the right hour of the right day — too early and the stone rolls out, too late and it never shows.",
+  "address": "",
+  "city": "Germantown",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2023,
+  "lat": 35.108246,
+  "lng": -89.78355,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/exposed-aggregate-driveway-memphis-tn-brick-ribbon-border.webp"
+   },
+   {
+    "src": "img/exposed-aggregate-driveway-memphis-tn-curved-apron.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-exposed-steps-bartlett",
+  "title": "Exposed aggregate steps and walk",
+  "service": "concrete-paving",
+  "surface": "steps",
+  "pattern": "",
+  "color": [
+   "sandstone"
+  ],
+  "finish": [
+   "exposed-aggregate"
+  ],
+  "feature": [
+   "steps-integrated"
+  ],
+  "description": "Steps and the walk poured together so the tread height is identical the whole way up. The exposed finish is also the grippiest thing you can put on an outdoor stair.",
+  "address": "",
+  "city": "Bartlett",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2022,
+  "lat": 35.225877,
+  "lng": -89.856558,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/exposed-aggregate-steps-walkway-memphis-tn.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-walkway-cordova",
+  "title": "Front walkway, saw-cut pattern",
+  "service": "concrete-paving",
+  "surface": "walkway",
+  "pattern": "",
+  "color": [
+   "slate-grey"
+  ],
+  "finish": [
+   "broom"
+  ],
+  "feature": [
+   "saw-cut"
+  ],
+  "description": "Broom finish with a saw-cut grid. Cutting the joints early, within the first day, is what decides whether the cracks follow the lines or ignore them.",
+  "address": "",
+  "city": "Cordova",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2023,
+  "lat": 35.128145,
+  "lng": -89.79871,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/concrete-walkway-memphis-tn-paving.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-drive-replace-memphis",
+  "title": "Driveway replacement, East Memphis",
+  "service": "concrete-driveways",
+  "surface": "driveway",
+  "pattern": "",
+  "color": [
+   "slate-grey"
+  ],
+  "finish": [
+   "broom"
+  ],
+  "feature": [
+   "repair"
+  ],
+  "description": "Original 1970s drive had scaled through and settled at the downspout. Tear-out, regrade, drainage corrected, then repour — the settlement was a water problem before it was a concrete problem.",
+  "address": "",
+  "city": "Memphis",
+  "state": "TN",
+  "neighborhood": "East Memphis",
+  "year": 2024,
+  "lat": 35.156578,
+  "lng": -90.073202,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/concrete-driveway-memphis-tn-residential.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-patio-munford",
+  "title": "Backyard patio, broom finish",
+  "service": "concrete-patios",
+  "surface": "patio",
+  "pattern": "",
+  "color": [
+   "slate-grey"
+  ],
+  "finish": [
+   "broom"
+  ],
+  "feature": [],
+  "description": "Straightforward patio, squared to the house and pitched a quarter inch to the foot away from the foundation. The pitch is the part nobody notices until it is wrong.",
+  "address": "",
+  "city": "Munford",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2022,
+  "lat": 35.431376,
+  "lng": -89.819222,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/concrete-patio-memphis-tn-backyard.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-retaining-brighton",
+  "title": "Stone retaining wall",
+  "service": "masonry",
+  "surface": "wall",
+  "pattern": "",
+  "color": [
+   "driftwood"
+  ],
+  "finish": [],
+  "feature": [],
+  "description": "Stone-faced retaining wall on a poured footing with drainage behind it. A wall that holds dirt is a drainage job wearing a stone jacket.",
+  "address": "",
+  "city": "Brighton",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2023,
+  "lat": 35.475153,
+  "lng": -89.719471,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/masonry-memphis-tn-stone-retaining-wall.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-kitchen-fireplace-collierville",
+  "title": "Outdoor kitchen and fireplace",
+  "service": "outdoor-living",
+  "surface": "outdoor-kitchen",
+  "pattern": "",
+  "color": [
+   "sandstone",
+   "chestnut"
+  ],
+  "finish": [],
+  "feature": [
+   "fire-feature"
+  ],
+  "description": "Kitchen run, chimney and hearth built as one structure on a single footing so nothing moves independently of anything else.",
+  "address": "",
+  "city": "Collierville",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2024,
+  "lat": 35.067903,
+  "lng": -89.676163,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/outdoor-kitchen-memphis-tn-fireplace.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-pavilion-somerville",
+  "title": "Pool deck under a stone pavilion",
+  "service": "outdoor-living",
+  "surface": "pool-deck",
+  "pattern": "",
+  "color": [
+   "driftwood",
+   "sandstone"
+  ],
+  "finish": [
+   "washed"
+  ],
+  "feature": [
+   "pavilion"
+  ],
+  "description": "Columns set before the deck went in, so the deck is poured around them and there is no patched collar at the base of each post.",
+  "address": "",
+  "city": "Somerville",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2023,
+  "lat": 35.230375,
+  "lng": -89.364452,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/pool-deck-outdoor-living-memphis-tn-stone-pavilion.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-counter-stacked-germantown",
+  "title": "Outdoor kitchen countertop, stacked stone base",
+  "service": "concrete-countertops",
+  "surface": "countertop",
+  "pattern": "",
+  "color": [
+   "driftwood"
+  ],
+  "finish": [
+   "smooth-trowel",
+   "sealed-matte"
+  ],
+  "feature": [],
+  "description": "Cast in place on top of the stone base rather than made in a shop and set — no seam at the back, and the overhang is whatever the drawing said it was.",
+  "address": "",
+  "city": "Germantown",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2024,
+  "lat": 35.091841,
+  "lng": -89.776476,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/concrete-countertop-memphis-tn-outdoor-kitchen-stacked-stone.webp"
+   },
+   {
+    "src": "img/concrete-countertop-memphis-tn-two-tier-outdoor-bar.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-counter-kitchen-collierville",
+  "title": "Kitchen countertops with a stone backsplash",
+  "service": "concrete-countertops",
+  "surface": "countertop",
+  "pattern": "",
+  "color": [
+   "charcoal"
+  ],
+  "finish": [
+   "smooth-trowel",
+   "sealed-matte"
+  ],
+  "feature": [],
+  "description": "Interior counters in a charcoal mix with a food-safe matte sealer. Concrete moves with the house, so the seam placement is decided by the cabinet run, not by the slab size.",
+  "address": "",
+  "city": "Collierville",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2023,
+  "lat": 35.02934,
+  "lng": -89.667773,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/concrete-countertops-memphis-tn-kitchen-stone-backsplash.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-bartop-waterfall-memphis",
+  "title": "Bar top with a waterfall edge, black granite",
+  "service": "concrete-countertops",
+  "surface": "countertop",
+  "pattern": "",
+  "color": [
+   "black-granite"
+  ],
+  "finish": [
+   "smooth-trowel",
+   "sealed-gloss"
+  ],
+  "feature": [
+   "waterfall-edge"
+  ],
+  "description": "Black granite mix with a mitred waterfall edge, so the grain runs over the end instead of stopping at it. The mitre is cut and closed while the piece is still green.",
+  "address": "",
+  "city": "Memphis",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2024,
+  "lat": 35.134811,
+  "lng": -90.043909,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/concrete-bar-top-memphis-tn-waterfall-edge.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-polished-bartop-memphis",
+  "title": "Polished bar top with an inlaid logo",
+  "service": "polished-concrete-floors",
+  "surface": "countertop",
+  "pattern": "",
+  "color": [
+   "charcoal"
+  ],
+  "finish": [
+   "polished",
+   "sealed-gloss"
+  ],
+  "feature": [
+   "logo-inlay"
+  ],
+  "description": "Ground and polished through the grits to expose the aggregate, with the logo inlaid in brass before the final passes so the metal polishes flush with the surface.",
+  "address": "",
+  "city": "Memphis",
+  "state": "TN",
+  "neighborhood": "Downtown",
+  "year": 2023,
+  "lat": 35.133069,
+  "lng": -90.060838,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/polished-concrete-bar-top-memphis-tn-inlaid-logo.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-stained-bartop-covington",
+  "title": "Stained bar top, chiselled edge",
+  "service": "stained-concrete",
+  "surface": "countertop",
+  "pattern": "",
+  "color": [
+   "walnut"
+  ],
+  "finish": [
+   "acid-stain",
+   "sealed-gloss"
+  ],
+  "feature": [],
+  "description": "Acid stain over a standard grey mix with the edge chiselled by hand after the cure, which is the only way to get an edge that reads as stone rather than as a form line.",
+  "address": "",
+  "city": "Covington",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2022,
+  "lat": 35.554462,
+  "lng": -89.661948,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/stained-concrete-bar-top-memphis-tn-chiselled-edge.webp"
+   }
+  ],
+  "demo": true
+ },
+ {
+  "id": "seed-commercial-memphis",
+  "title": "Commercial flatwork",
+  "service": "commercial-concrete",
+  "surface": "parking-lot",
+  "pattern": "",
+  "color": [
+   "slate-grey"
+  ],
+  "finish": [
+   "broom"
+  ],
+  "feature": [],
+  "description": "Commercial pour on a night schedule so the business never closed. Flatwork, jointing and ADA-compliant falls at the entrances.",
+  "address": "",
+  "city": "Memphis",
+  "state": "TN",
+  "neighborhood": "",
+  "year": 2024,
+  "lat": 35.135637,
+  "lng": -90.020756,
+  "privacy": true,
+  "photos": [
+   {
+    "src": "img/commercial-concrete-memphis-tn-flatwork.webp"
+   }
+  ],
+  "demo": true
+ }
+]
