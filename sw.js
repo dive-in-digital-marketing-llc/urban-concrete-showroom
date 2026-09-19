@@ -3,20 +3,47 @@
    install so the app opens and the map chrome renders offline; tiles are
    cached as they are seen, so a street he has already looked at still draws.
    Jobs themselves live in IndexedDB and never needed the network. */
-const VERSION = 'ucs-v1';
+const VERSION = 'ucs-v2';
 const SHELL = `${VERSION}-shell`;
 const TILES = `${VERSION}-tiles`;
 const MEDIA = `${VERSION}-media`;
 
 const SHELL_FILES = [
-  '.', 'index.html', 'assets/app.css', 'assets/app.js', 'assets/vocab.js',
-  'manifest.webmanifest', 'data/seed.json', 'img/logo.webp',
+  '.', 'index.html', 'manifest.webmanifest', 'data/seed.json',
+  'img/logo.webp', 'img/icon-180.png', 'img/icon-192.png', 'img/icon-512.png',
+  // Leaflet's marker sprites are fetched by the library, not the page, so
+  // they are not picked up by the network-first branch until something has
+  // already drawn a default marker. Without them an offline first run gets
+  // a map with no pins on it.
+  'vendor/leaflet/images/marker-icon.png', 'vendor/leaflet/images/marker-icon-2x.png',
+  'vendor/leaflet/images/marker-shadow.png',
+  'assets/app.css',
+  'assets/taxonomy.js', 'assets/geo.js', 'assets/exif.js', 'assets/imaging.js',
+  'assets/store.js', 'assets/intel.js', 'assets/search.js', 'assets/map.js',
+  'assets/ui.js', 'assets/owner.js', 'assets/app.js',
   'vendor/leaflet/leaflet.js', 'vendor/leaflet/leaflet.css'
 ];
 
+/* The sample photographs. A contractor who installs the app and then
+   drives out of signal used to get a showroom with no pictures in it
+   unless he happened to have scrolled past them first. They are precached
+   into MEDIA rather than SHELL so the activate-time purge treats them the
+   same as photos he adds himself. */
+const SEED_MEDIA = 'data/seed.json';
+
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open(SHELL)
+    caches.open(MEDIA)
+      .then(async (cache) => {
+        try {
+          const res = await fetch(SEED_MEDIA, { cache: 'no-cache' });
+          if (!res.ok) return;
+          const book = await res.json();
+          const urls = [...new Set((book.photos || []).map((p) => p.url).filter(Boolean))];
+          await Promise.allSettled(urls.map((u) => cache.add(u)));
+        } catch (err) { /* the app works without them; it just looks empty offline */ }
+      })
+      .then(() => caches.open(SHELL))
       // addAll rejects the whole batch if one file 404s; add individually so a
       // single missing asset cannot leave the app with no cache at all.
       .then((c) => Promise.allSettled(SHELL_FILES.map((f) => c.add(f))))
@@ -85,7 +112,20 @@ self.addEventListener('fetch', (e) => {
         }
         return res;
       })
-      .catch(() => caches.match(request).then((hit) => hit || caches.match('index.html')))
+      .catch(async () => {
+        const hit = await caches.match(request);
+        if (hit) return hit;
+        /* The index.html fallback is for NAVIGATIONS. Applied to every
+           request it handed back an HTML document, with HTTP 200 and
+           text/html, to whatever asked — including a <script src> that
+           missed the cache, which fails as "Unexpected token '<'" and
+           takes the whole app down. A 200 carrying the wrong body is
+           worse than an honest failure. */
+        if (request.mode === 'navigate') {
+          return (await caches.match('index.html')) || Response.error();
+        }
+        return Response.error();
+      })
   );
 });
 

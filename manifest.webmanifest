@@ -1,17 +1,34 @@
 {
-  "name": "Urban Concrete Showroom — Baltz & Sons Concrete",
+  "name": "Urban Showroom — Baltz & Sons Concrete",
   "short_name": "Showroom",
-  "description": "Every Baltz & Sons project on a map. Describe the work you want and see the closest one we built.",
+  "description": "Every project on a map. Describe the work you want and see the closest one we built, with photos, before-and-afters and how far away it is.",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",
-  "orientation": "portrait-primary",
   "background_color": "#12100E",
   "theme_color": "#12100E",
-  "categories": ["business", "utilities"],
+  "categories": [
+    "business",
+    "utilities"
+  ],
   "icons": [
-    { "src": "img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "img/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }

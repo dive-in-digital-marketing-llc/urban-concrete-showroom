@@ -1,160 +1,166 @@
-# Urban Concrete Showroom
+# Urban Showroom
 
-A map of every job Baltz & Sons has poured, searchable in plain English, built to be
+Every job a contractor has finished, on a map, searchable in plain English, built to be
 shown on a phone standing in somebody's driveway.
 
-A customer asks "do you have a showroom?" Kevin hands them his phone. They type
+A customer asks "do you have a showroom?" The contractor hands them his phone. They type
 *stamped and colored driveway* and get the closest house where that exact thing was
-built — his photographs, the pattern, the colour, the finish, and how far away it is.
+built — his photographs, the before and after, the pattern, the colour, the finish, and
+how far away it is.
 
 Status: **working prototype, not sold.** Kevin Baltz has not bought this. It ships with
-32 sample pins so it demos from a cold start; those are real Baltz & Sons photographs at
-approximate locations, flagged `demo: true`, badged in the UI, and removable in one tap.
+32 sample projects so it demos from a cold start; those are real Baltz & Sons
+photographs at approximate locations, flagged `demo: true`, badged in the UI, and
+removable in one tap from the contractor tools.
+
+---
+
+## What it is
+
+A static site. No server, no database, no build step, no account. Everything the
+contractor adds lives in IndexedDB on his own device, which is why the backup in the
+tools menu matters: it is the only copy that survives a lost phone.
+
+Built to Kevin Baltz's brief, which asks for a project record keyed on an address rather
+than a photo album, photo intelligence that does the filing while the contractor does
+the deciding, and a privacy model that never puts a customer's street number in front of
+a stranger.
+
+The vocabulary is deliberately trade-agnostic — sixteen trades, twenty-six project
+types, from concrete and masonry through carpentry, roofing, cabinetry and remodelling.
+Renaming the company in the tools menu is all it takes for this to be a different
+contractor's showroom.
+
+## What the customer sees
+
+- **Search in their own words.** "Patio with black granite colored", "pool deck near me",
+  "before and after in Germantown", "driveways from 2024". The parse is shown back to
+  them in their own phrasing so a miss is correctable rather than mysterious.
+- **Three views over the same results** — pins on a map, a gallery, and a wall of
+  before/after sets.
+- **A before/after presentation mode**: full screen, no chrome, a seam you drag with a
+  finger or the arrow keys.
+- **Distance from where they are standing**, to the pin they can actually see.
+
+## What the contractor gets
+
+Behind a PIN:
+
+- **Photo import that files itself.** EXIF location and timestamp propose which job each
+  photo belongs to and say *why* ("120 yd from this job; taken during it"). Perceptual
+  hashing groups shots of the same view and flags duplicates. Stage (before / during /
+  after) is inferred from the calendar days the photos span. Captions and tags are
+  drafted from what is actually known. **Every one of those is a suggestion on a
+  confirmation screen. Nothing is written until he taps Save.**
+- **Before/after pairs proposed, not assumed** — matched on framing and the gap between
+  days, presented with a confidence and a reason, one tap to accept, reject or swap.
+- **A project editor** covering type, trade, material, pattern, finish, colour, features,
+  custom tags, dates, cover photo and the four visibility levels.
+- **Curated sets** — save a search or a hand-picked group as "Outdoor kitchens for the
+  Harts" and open it before a meeting.
+- **Backup and restore** as a single JSON file with the photos inside it. The dialog is
+  explicit that the file holds every job at every privacy level, the exact addresses and
+  each photo's GPS fix — it is a backup, not something to hand anybody.
+- **An inbox for photos left unfiled**, so "leave unfiled" is a decision rather than a
+  place things disappear to.
+
+## Privacy
+
+Four levels per project: private, my team, shareable with a client, public showroom.
+A **hand-over mode** in the tools decides which of them a locked app shows once the
+phone leaves the contractor's hand, which is what makes the middle two levels mean
+anything. New jobs default to *client-shareable*, so putting one in the always-on
+public showroom is a deliberate act rather than the default.
+
+Exact residential addresses are **never** exposed automatically.
+
+- A non-owner viewer gets the coordinate **quantised** to a fixed ~800 ft lattice, not
+  offset. An offset is reversible by construction — the first version of this seeded a
+  hash on the project id, and since the id is public and the algorithm ships in public
+  JavaScript, the front door came back out of it with zero error. Quantisation throws
+  the information away instead: every house in a cell produces the identical pin.
+- The address is rendered street-only, with the house number, unit and ZIP stripped.
+- The **search index is built from that same redacted address**, so typing a house
+  number cannot confirm what the display withheld.
+- Distances are measured **from the coarsened pin, not the real house**, and rounded to
+  25 yards. Place anchors ("near Germantown") are centroids of coarsened points too —
+  built from true ones, thirty distances on one screen solve back to a real address.
+- `Geo.canView` is the single gate. Every render path draws from `App.visibleProjects()`.
+- `exactAddress` is a separate per-project opt-in, off by default, and publishing one to
+  the public showroom asks for a second tap.
+
+**What this does not do.** A photograph of a house, beside its street name, with a pin
+within 800 ft of it, identifies the parcel to anyone willing to drive down the road. The
+coarsening stops bulk extraction and casual snooping; it does not stop somebody
+determined to find one specific house. That is a property of showing photographs of
+houses, and it is worth saying to a client rather than leaving implied.
+
+The PIN is honest about itself too: the whole app runs in the browser, so it keeps a
+customer holding the phone out of the editing screens. It is not a security boundary,
+and the dialog says so.
+
+## What is real and what is not
+
+- **Real:** EXIF parsing from raw bytes, perceptual hashing, duplicate detection,
+  photo→project matching, stage inference, pair proposals, the whole search engine, the
+  privacy model, offline operation.
+- **Not a vision model.** "AI captions and tags" here means a deterministic, on-device
+  heuristic that assembles a caption from things the app actually knows — the stage, the
+  project's own facets, the dominant colour, the date. It never invents an object it
+  cannot see. A real vision model needs a server and an API key, neither of which can
+  live in a public static repo. `Intel.vision` is a documented swap-in seam for the day
+  that changes.
+- **No drive time.** Distances are straight-line. There is no routing engine and
+  `Geo.fmtMiles` will not pretend otherwise.
+- **The sample book has no before/after pairs.** Every Baltz photograph we have is
+  finished work. Fabricating a "before" of a real customer's house was not acceptable,
+  so the before/after wall is empty until real pairs are imported — two or three sets
+  from Kevin would make that demo land.
 
 ---
 
 ## Run it
 
 ```
-cd apps/urban-concrete-showroom
 python3 -m http.server 8777
 # http://127.0.0.1:8777/
 ```
 
-Static files only — no build step, no server, no database. Owner PIN is `1945` until
-changed in owner tools.
+Static files only. The PIN is set on first use of the contractor tools.
+
+## Tests
+
+```
+node tools/test_engine.js      # 152 checks: EXIF, geo, privacy, hashing, intel, search, migration
+```
+
+The EXIF tests build a structurally real JPEG in memory with computed offsets and read
+it back — little- and big-endian, both hemispheres, null island, garbage, truncation.
 
 ## Deploy it
 
-Any static host. It is deliberately not part of the WordPress theme: nothing here needs
-PHP, and keeping it separate means a theme deploy can never take the showroom down.
-Serve `apps/urban-concrete-showroom/` at a path or subdomain and it works as-is.
+Any static host; it is published from `main` at the repository root to GitHub Pages.
+See `DEPLOY.md`.
 
-Two things a host must get right:
-
-- **HTTPS.** Geolocation and the service worker both refuse to run without it, and the
-  whole product is distance.
-- **Correct MIME type on `manifest.webmanifest`** (`application/manifest+json`), or the
-  install-to-home-screen prompt never appears.
-
----
-
-## What is in here
+## Layout
 
 ```
-index.html              the app shell
-assets/vocab.js         the search vocabulary — services, surfaces, patterns,
-                        finishes, colours, features, and every way people say them
-assets/app.js           store, search engine, map, owner tools
-assets/app.css          styles, carried from the site's "Foundry" design system
-data/seed.json          the 32 sample pins (generated)
-tools/build_seed.py     regenerates data/seed.json
-tools/test_search.js    headless checks on the parser and the ranker
-vendor/leaflet/         Leaflet 1.9.4, vendored (BSD-2-Clause, LICENSE included)
-img/                    project photographs and app icons
-sw.js                   service worker: offline shell, tile and photo cache
+index.html              markup only — no logic
+assets/taxonomy.js      the vocabulary: 7 dimensions, weights, term index
+assets/geo.js           distance, the blur, visibility, geocode
+assets/exif.js          EXIF from raw bytes (JPEG APP1, WebP RIFF)
+assets/imaging.js       resize, encode, dHash, colour layout
+assets/store.js         IndexedDB, v1→v2 migration, in-memory fallback
+assets/intel.js         matching, stages, pairs, captions, tags
+assets/search.js        parse, score, rank
+assets/map.js           Leaflet wrapper — never reads a raw coordinate
+assets/ui.js            DOM helpers; nothing builds HTML from data
+assets/owner.js         the contractor tools
+assets/app.js           the controller
+vendor/leaflet/         vendored, not a CDN — a blocked CDN once froze the splash
+data/seed.json          the sample book
+tools/build_seed.py     regenerates it
+tools/test_engine.js    the suite
 ```
 
-### Where the data lives
-
-In the browser, in IndexedDB, on the phone that added it. There is no account and no
-server. That is a deliberate trade:
-
-- **For:** works with no signal, costs nothing to run, no customer address ever leaves
-  the device, and there is nothing of ours for Kevin to be locked into.
-- **Against:** the book does not sync between phones by itself. Export and import is
-  how a job gets from Kevin's phone to a crew lead's, and it is one tap each way.
-
-If the product is ever sold to more than one contractor, that is the line where a real
-backend starts earning its keep. Not before.
-
----
-
-## The search
-
-This is the part worth reading before changing anything.
-
-A homeowner does not type `slug:stamped-concrete`. They type *stamped and colored
-driveway*, or *patio with black granite colored* — several facets at once, in the order
-a person speaks them. So the query is parsed, not substring-matched:
-
-1. **Normalise** — `&` becomes `and`, punctuation goes, case goes.
-2. **Strip the instruction words** — *near me*, *closest* and friends mean "sort by
-   distance", not "filter on the word near".
-3. **Walk longest-phrase-first** against the vocabulary. This is what makes
-   `black granite` resolve to one colour rather than the word *black* plus the word
-   *granite*, and why `colonial cobble` is found before the bare `cobble`.
-4. **Whatever is left** is free text, scored against the job's own words.
-
-Then every job is scored across six dimensions — service, surface, colour, pattern,
-finish, feature. Three things about the scoring are load-bearing:
-
-- **A job sits on more than one service line.** A stamped cobblestone driveway is filed
-  under Stamped Concrete *and* it is a driveway. With a single service value, a search
-  for "cobblestone driveway" ranked two driveways that were not cobble above the one
-  that was. `serviceSet()` derives the implied lines from the surface and the finish.
-- **A miss demotes, it does not veto.** Ask for something he has never built and you
-  should still see the nearest thing to it, lower down.
-- **Rare facets count for more.** Without this, the common noun swamps the specific
-  one: "seamless slate patio" scored three ordinary patios above the single seamless
-  slate job in the book, because *patio* hit twice and *seamless slate* only once.
-
-And when somebody names a rare thing that nothing near the top has, the best job that
-*does* have it is promoted to second place and labelled "Closest … we have built".
-Promoting beats reranking: nothing relevant gets demoted, and the customer is told
-plainly that it is not an exact match.
-
-```
-node tools/test_search.js
-```
-
-Runs the parser and ranker headless against `data/seed.json`, including the two queries
-this product was pitched on. It exits non-zero on failure, so CI can gate on it. Every
-check in there is a bug that was actually found, not a hypothetical.
-
-### Adding vocabulary
-
-`assets/vocab.js`, `{id, label, terms}`. Put in every way somebody might type it,
-including the misspellings you hear on the phone. Multi-word terms are safe — the
-parser prefers the longest match. Then rerun the tests.
-
----
-
-## What the owner side does
-
-Behind a four-digit PIN, so the phone can be handed to a customer.
-
-**Adding a job** takes a name, a location, photos, and a few taps:
-
-- **Location** three ways: *I am here now* (GPS — the right answer, because he is
-  standing on the job the day he finishes it), an address lookup, or dragging the pin.
-- **Photos** straight from the camera, up to twelve. Every one is drawn to a canvas and
-  re-encoded before it is stored — phone cameras produce 4–12MB files and twenty jobs of
-  those would blow past any browser quota.
-- **Facets** as buttons, not typing. This is the part that decides whether a customer
-  finds the job in two years, so the form says so.
-
-**Privacy is on by default.** These are customers' houses. With it on, a visitor sees
-the street and the town and a pin on the block — never the house number. Turning it off
-for a job is a deliberate act and the form says to ask the homeowner first.
-
-**Export** writes every job and photo to one JSON file. **Import** merges one back.
-
----
-
-## Things that will bite
-
-- **Nominatim** (the address lookup) is free, keyless, and rate-limited to roughly one
-  request a second. It only fires on an explicit tap, and every failure path falls back
-  to "drop the pin yourself" — which is what happens on a job site with one bar.
-- **Map tiles** come from CARTO's free basemap. Fine at this volume; if the app is ever
-  sold more widely, that needs a paid tile plan or a self-hosted style.
-- **Leaflet is vendored on purpose.** It was on a CDN, and the first browser test found
-  that a blocked CDN left the app stuck on its splash screen forever. It now ships with
-  the app, and the app renders the list, the search and the photos even if the map
-  cannot load at all.
-- **Storage is per-device and per-origin.** Clearing site data clears the book. Export
-  before changing phones; owner tools say so.
-- **The sample pins must go** the moment Kevin adds real work. Do not strip the `demo`
-  flag to make a screenshot look better — it is what keeps approximate locations from
-  being read as real job sites.
+Built by [Dive In Digital Marketing](https://diveindigitalmarketing.com).

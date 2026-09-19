@@ -87,6 +87,9 @@ h1,h2,h3{font-family:var(--font-display);color:var(--bone);font-weight:600;
 .app{position:fixed;inset:0;display:flex;flex-direction:column;}
 
 /* --- top bar ------------------------------------------------------------ */
+.topbar,.parsed,.railrow,.collbar,.notice,.sheet-head,.vs,.chip{
+  user-select:none;-webkit-user-select:none;
+}
 .topbar{
   position:relative;z-index:640;flex:0 0 auto;
   padding:calc(var(--safe-t) + 10px) var(--s4) 10px;
@@ -98,8 +101,12 @@ h1,h2,h3{font-family:var(--font-display);color:var(--bone);font-weight:600;
 
 .brand{display:flex;align-items:center;gap:10px;min-width:0;}
 .brand img{height:38px;width:auto;flex:0 0 auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.6));}
-.brand-txt{min-width:0;}
-.brand-name{
+/* text-overflow needs a block box. Both of these computed to
+   `display:inline`, where neither overflow nor ellipsis applies, so at
+   narrow widths the company name ran under the opaque header buttons
+   instead of truncating. */
+.brand-txt{min-width:0;overflow:hidden;display:flex;flex-direction:column;}
+.brand-name{display:block;
   font-family:var(--font-cond);text-transform:uppercase;letter-spacing:.075em;
   font-size:.78rem;font-weight:600;color:var(--sand);line-height:1.12;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
@@ -116,19 +123,22 @@ h1,h2,h3{font-family:var(--font-display);color:var(--bone);font-weight:600;
 }
 @media (max-width:400px){
   .brand-name{font-size:.645rem;letter-spacing:.012em;}
-  .icon-btn{width:40px;height:40px;flex-basis:40px;}
+  /* The buttons stay at 44. This is a gloved thumb on a job site, so the
+     lockup is what gives way, not the tap target. */
+  .topbar{gap:6px;}
 }
 @media (max-width:344px){
   .brand-sub{display:none;}
 }
 .brand-sub{
+  display:block;
   font-size:.66rem;color:var(--stone);letter-spacing:.06em;text-transform:uppercase;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .topbar-sp{flex:1 1 auto;}
 
 .icon-btn{
-  width:42px;height:42px;flex:0 0 42px;border-radius:var(--r-full);
+  width:44px;height:44px;flex:0 0 44px;border-radius:var(--r-full);
   display:grid;place-items:center;
   background:rgba(34,30,27,.9);border:1px solid var(--line-2);
   color:var(--bone);backdrop-filter:blur(10px);
@@ -163,8 +173,11 @@ h1,h2,h3{font-family:var(--font-display);color:var(--bone);font-weight:600;
   font-size:1rem;color:var(--bone);padding:10px 0;
 }
 .searchbar input::placeholder{color:var(--stone);}
-.search-clear{width:34px;height:34px;border-radius:var(--r-full);display:none;place-items:center;color:var(--stone);}
-.search-clear.on{display:grid;}
+/* Driven by the `hidden` attribute, which is what the app actually sets.
+   The `.on` class was never added by anything, so the clear button could
+   not be shown at all and the only way to empty the box was select-all. */
+.search-clear{width:38px;height:38px;border-radius:var(--r-full);display:grid;place-items:center;color:var(--stone);}
+.search-clear[hidden]{display:none;}
 .search-clear:hover{color:var(--bone);background:var(--surface-4);}
 .search-go{
   height:38px;padding:0 var(--s4);border-radius:var(--r-full);
@@ -311,7 +324,9 @@ h1,h2,h3{font-family:var(--font-display);color:var(--bone);font-weight:600;
 .sheet.open{transform:translateY(0);}
 .sheet.hidden{transform:translateY(100%);}
 
-.sheet-grab{flex:0 0 auto;padding:10px 0 6px;display:grid;place-items:center;cursor:grab;}
+/* Dragging the handle used to select every label on the screen. */
+.sheet-grab{flex:0 0 auto;padding:10px 0 6px;display:grid;place-items:center;cursor:grab;
+  user-select:none;-webkit-user-select:none;touch-action:none;}
 .sheet-grab::before{content:"";width:44px;height:4px;border-radius:var(--r-full);background:var(--line-2);}
 .sheet:active .sheet-grab{cursor:grabbing;}
 
@@ -320,7 +335,7 @@ h1,h2,h3{font-family:var(--font-display);color:var(--bone);font-weight:600;
   padding:0 var(--s4) var(--s3);
 }
 .sheet-count{font-family:var(--font-cond);text-transform:uppercase;letter-spacing:.1em;
-  font-size:.95rem;color:var(--sand);font-weight:600;}
+  font-size:.95rem;color:var(--sand);font-weight:600;white-space:nowrap;flex:0 0 auto;}
 .sheet-sub{font-size:.8rem;color:var(--stone);flex:1 1 auto;min-width:0;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .sheet-sort{
@@ -653,19 +668,10 @@ select.input{
 /* ==========================================================================
    banners / toasts
    ========================================================================== */
-.demo-banner{
-  position:absolute;left:var(--s4);right:var(--s4);z-index:610;
-  bottom:calc(var(--sheet-peek) + 10px);
-  display:flex;align-items:center;gap:var(--s2);
-  background:rgba(44,39,35,.95);backdrop-filter:blur(10px);
-  border:1px solid rgba(217,164,65,.42);border-radius:var(--r-m);
-  padding:9px var(--s3);font-size:.78rem;color:var(--bone-2);
-  box-shadow:0 8px 24px rgba(0,0,0,.45);
-}
-.demo-banner svg{flex:0 0 auto;color:var(--warn);}
-.demo-banner button{margin-left:auto;color:var(--stone);flex:0 0 auto;padding:4px;}
-.demo-banner button:hover{color:var(--bone);}
-.demo-banner.gone{display:none;}
+/* The v1 `.demo-banner` rules lived here. No element carries that class
+   any more — the markup uses `.notice` — so they were dead, and so was the
+   `body.no-map` rule that relied on them to hide the sample-data banner in
+   the map fallback. Both are handled in the v2 block at the end. */
 
 .toast{
   position:absolute;left:50%;bottom:calc(var(--s7) + var(--safe-b));
@@ -704,24 +710,11 @@ select.input{
 /* ==========================================================================
    responsive — tablet / desktop
    ========================================================================== */
-@media (min-width:860px){
-  :root{--sheet-peek:0px;}
-  .sheet{
-    left:auto;right:0;top:0;bottom:0;width:414px;height:100%;max-height:100%;
-    border-radius:0;border-top:none;border-left:1px solid var(--line-2);
-    transform:none;box-shadow:-18px 0 50px rgba(0,0,0,.55);
-  }
-  .sheet.hidden{transform:translateX(100%);}
-  .sheet-grab{display:none;}
-  .sheet-head{padding-top:calc(var(--safe-t) + 148px);}
-  .topbar,.searchwrap,.chips,.parsed{padding-right:calc(414px + var(--s4));}
-  .demo-banner{right:calc(414px + var(--s4));bottom:var(--s4);}
-  .detail{left:auto;width:520px;transform:translateX(100%);}
-  .detail.open{transform:translateX(0);}
-  .modal{align-items:center;}
-  .modal-panel{border-radius:var(--r-xl);max-height:88vh;}
-  .leaflet-control-zoom{margin-right:calc(414px + 12px)!important;}
-}
+/* The v1 full-height right rail lived here. v2's results panel is a
+   floating card instead, defined in the v2 section at the end of this
+   file. Layering the two left v1's `top:0` in force — v2 only set
+   `bottom` and `height` — so the card started at the top of the window and
+   ran straight under the header. */
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
@@ -750,8 +743,516 @@ body.no-map .sheet{
   background:rgba(18,16,14,.985);
 }
 body.no-map .sheet-grab{display:none;}
-body.no-map .demo-banner{display:none;}
 body.no-map .leaflet-control-zoom{display:none;}
 @media (min-width:860px){
-  body.no-map .sheet{padding-top:calc(var(--safe-t) + 158px);}
+  body.no-map .sheet{padding-top:var(--s4);}
+}
+
+/* ==========================================================================
+   v2 — what Kevin's brief added
+   ==========================================================================
+   Three views over the same result set, a presentation mode for before and
+   after, curated sets, and the contractor's confirmation screens. The
+   palette, type scale and motion above are unchanged: this is the same
+   brand with more to do.
+   ========================================================================== */
+
+/* --- view switcher ------------------------------------------------------ */
+/* Two rows on a phone. The switcher alone is wider than a 414px screen, so
+   keeping one row pushed "Sets" and every example chip off the right edge
+   where nobody scrolls to find them. */
+.railrow{
+  position:relative;z-index:628;flex:0 0 auto;
+  display:flex;align-items:center;gap:var(--s2);flex-wrap:wrap;
+  padding:10px var(--s4) 2px;pointer-events:none;
+}
+.railrow::-webkit-scrollbar{display:none;}
+.railrow > *{pointer-events:auto;}
+.railrow .chips{padding:0;z-index:auto;flex:1 1 200px;min-width:0;overflow-x:auto;}
+@media (max-width:620px){
+  /* The switcher takes the whole first line; Sets and the examples share
+     the second rather than taking one each. */
+  .railrow .viewswitch{flex:1 0 100%;}
+  .railrow .vs.sets{margin-top:6px;}
+  .railrow .chips{flex:1 1 90px;margin-top:6px;}
+  .vs{padding:8px 11px;font-size:.76rem;}
+}
+/* Below ~400px "Before / After" no longer fits on one line with the other
+   two, and the row has no overflow to scroll (the page itself cannot
+   scroll sideways), so it was simply cut off at the edge. The tabs share
+   the width instead and the labels shorten. */
+.vs .lbl-short{display:none;}
+@media (max-width:420px){
+  .viewswitch{width:100%;}
+  .vs{flex:1 1 0;min-width:0;justify-content:center;padding:9px 6px;
+    font-size:.72rem;letter-spacing:.03em;overflow:hidden;}
+  .vs svg{flex:0 0 auto;}
+  /* "Before / After" does not fit a third of a 320px screen at any size
+     worth reading, so the tab says what the screen does instead. */
+  .vs .lbl-long{display:none;}
+  .vs .lbl-short{display:inline;}
+}
+@media (max-width:360px){
+  .vs svg{display:none;}
+  .vs{font-size:.7rem;letter-spacing:.02em;}
+}
+
+.viewswitch{
+  flex:0 0 auto;display:flex;gap:2px;padding:3px;
+  background:rgba(34,30,27,.92);backdrop-filter:blur(10px);
+  border:1px solid var(--line-2);border-radius:var(--r-full);
+}
+.vs{
+  display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+  padding:10px 13px;border-radius:var(--r-full);min-height:40px;
+  font-family:var(--font-cond);text-transform:uppercase;letter-spacing:.07em;
+  font-size:.8rem;font-weight:600;color:var(--stone);
+  transition:background .2s,color .2s;
+}
+.vs.on{background:var(--bronze);color:var(--ink);}
+.vs:not(.on):hover{color:var(--sand);}
+.vs[hidden]{display:none;}
+.vs.sets{
+  flex:0 0 auto;background:rgba(34,30,27,.92);backdrop-filter:blur(10px);
+  border:1px solid var(--line-2);color:var(--bone-2);padding:11px 16px;min-height:42px;
+}
+.vs.sets:hover{border-color:var(--bronze);color:var(--sand);}
+
+/* --- curated set bar ---------------------------------------------------- */
+.collbar{
+  position:relative;z-index:629;flex:0 0 auto;
+  margin:8px var(--s4) 0;padding:8px var(--s3);
+  display:flex;align-items:center;gap:var(--s2);
+  background:linear-gradient(135deg,rgba(196,135,63,.18),var(--surface-3) 70%);
+  border:1px solid rgba(196,135,63,.4);border-radius:var(--r-full);
+  color:var(--sand);
+}
+.collbar[hidden]{display:none;}
+.cb-name{font-family:var(--font-cond);text-transform:uppercase;letter-spacing:.08em;
+  font-size:.86rem;font-weight:600;flex:1 1 auto;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.cb-n{font-size:.74rem;color:var(--bone-2);font-variant-numeric:tabular-nums;flex:0 0 auto;}
+.cb-x{flex:0 0 32px;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;
+  color:var(--bone-2);background:rgba(18,16,14,.4);}
+.cb-x:hover{color:var(--white);background:rgba(18,16,14,.7);}
+
+/* --- notices ------------------------------------------------------------ */
+.notice{
+  position:relative;z-index:629;flex:0 0 auto;
+  margin:8px var(--s4) 0;padding:9px var(--s3);
+  display:flex;align-items:flex-start;gap:var(--s2);
+  background:rgba(34,30,27,.94);backdrop-filter:blur(10px);
+  border:1px solid var(--line-2);border-radius:var(--r-m);
+  font-size:.78rem;color:var(--stone);line-height:1.45;
+}
+.notice[hidden]{display:none;}
+.notice svg{flex:0 0 auto;margin-top:2px;color:var(--stone);}
+.notice span{flex:1 1 auto;min-width:0;}
+.notice b{color:var(--bone-2);font-weight:600;}
+.notice button{flex:0 0 32px;width:32px;height:32px;display:grid;place-items:center;
+  border-radius:50%;color:var(--stone);margin:-4px -4px -4px 0;}
+.notice button:hover{color:var(--bone);background:rgba(239,233,225,.08);}
+.notice.warn{border-color:rgba(217,164,65,.45);background:rgba(50,38,18,.92);color:var(--warn);}
+.notice.warn svg{color:var(--warn);}
+
+/* --- the sheet's three heights -----------------------------------------
+   v1 had one height and an open/closed flag. Three stops earn their
+   complexity: peek to see the map, half to read the list, full to scroll
+   it. The transform stays off so the height is the only thing moving.   */
+.sheet{transform:none;}
+.sheet.sh-peek{height:var(--sheet-peek);max-height:var(--sheet-peek);}
+.sheet.sh-half{height:calc(100% - var(--head-h,296px) - 76px);max-height:calc(100% - var(--head-h,296px) - 76px);}
+.sheet.sh-full{height:calc(100% - var(--head-h,296px) - 6px);max-height:calc(100% - var(--head-h,296px) - 6px);}
+body.view-grid .sheet,body.view-pairs .sheet{display:none;}
+
+.sheet-act{
+  flex:0 0 auto;font-family:var(--font-cond);text-transform:uppercase;
+  letter-spacing:.08em;font-size:.76rem;font-weight:600;color:var(--sand);
+  background:var(--bronze-dim);border:1px solid rgba(196,135,63,.4);
+  border-radius:var(--r-full);padding:9px 14px;min-height:38px;
+}
+.sheet-act:hover{background:var(--bronze);color:var(--ink);}
+.sheet-act[hidden]{display:none;}
+
+/* --- gallery and before/after panes ------------------------------------- */
+.viewpane{
+  position:absolute;left:0;right:0;top:0;bottom:0;z-index:610;
+  background:var(--ink);overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:calc(var(--head-h,236px) + 10px) var(--s4) calc(var(--s8) + var(--safe-b));
+  overscroll-behavior:contain;
+}
+.viewpane[hidden]{display:none;}
+
+.panehead-wrap{margin-bottom:var(--s3);}
+.panehead{display:flex;align-items:baseline;gap:var(--s3);}
+.panehead .sheet-sub{flex:1 1 auto;}
+
+/* 148px needed 308px of content and the pane offers 288px at 320 wide, so
+   the "gallery" fell to one photo a row — the opposite of a view meant for
+   flicking through work in front of somebody. */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:var(--s2);}
+@media (min-width:380px){ .grid{gap:var(--s3);} }
+.tile{
+  display:flex;flex-direction:column;text-align:left;
+  background:var(--surface-3);border:1px solid var(--line);
+  border-radius:var(--r-m);overflow:hidden;
+  transition:border-color .2s,transform .2s var(--ease);
+}
+.tile:hover,.tile:focus-visible{border-color:var(--bronze);}
+.tile:active{transform:scale(.985);}
+.tile-img{position:relative;aspect-ratio:4/3;background:var(--surface-4);}
+.tile-img img{width:100%;height:100%;object-fit:cover;}
+.tile-flag,.tile-n{
+  position:absolute;bottom:6px;
+  background:rgba(18,16,14,.85);color:var(--bone-2);backdrop-filter:blur(6px);
+  font-family:var(--font-cond);letter-spacing:.06em;text-transform:uppercase;
+  font-size:.64rem;font-weight:700;padding:3px 7px;border-radius:var(--r-full);
+  display:inline-flex;align-items:center;gap:4px;
+}
+.tile-flag{left:6px;color:var(--sand);}
+.tile-n{right:6px;font-variant-numeric:tabular-nums;}
+.tile-cap{padding:9px 10px 11px;display:flex;flex-direction:column;gap:3px;min-width:0;}
+.tile-title{
+  font-family:var(--font-display);font-size:.9rem;color:var(--bone);line-height:1.22;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.tile-meta{font-size:.72rem;color:var(--stone);}
+
+.pairwall{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--s3);}
+.pairtile{
+  display:flex;flex-direction:column;text-align:left;
+  background:var(--surface-3);border:1px solid var(--line);
+  border-radius:var(--r-m);overflow:hidden;transition:border-color .2s,transform .2s var(--ease);
+}
+.pairtile:hover{border-color:var(--bronze);}
+.pairtile:active{transform:scale(.99);}
+.pt-imgs{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line-2);}
+.pt-half{position:relative;aspect-ratio:1/1;background:var(--surface-4);}
+.pt-half img{width:100%;height:100%;object-fit:cover;}
+.pt-lbl{
+  position:absolute;left:5px;bottom:5px;
+  background:rgba(18,16,14,.85);color:var(--bone-2);
+  font-family:var(--font-cond);text-transform:uppercase;letter-spacing:.08em;
+  font-size:.62rem;font-weight:700;padding:2px 7px;border-radius:var(--r-full);
+}
+.pt-cap{padding:10px 11px 12px;display:flex;flex-direction:column;gap:3px;}
+.pt-title{font-family:var(--font-display);font-size:.96rem;color:var(--bone);line-height:1.2;}
+.pt-meta{font-size:.74rem;color:var(--stone);}
+
+/* --- detail additions --------------------------------------------------- */
+.sec-h{
+  font-family:var(--font-cond);text-transform:uppercase;letter-spacing:.11em;
+  font-size:.84rem;color:var(--bronze-br);font-weight:600;
+  margin:var(--s5) 0 var(--s3);
+}
+.dist-main{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1 1 auto;}
+.dist-n{
+  font-family:var(--font-cond);font-size:1.28rem;font-weight:700;color:var(--sand);
+  line-height:1.15;display:inline-flex;align-items:center;gap:6px;
+  font-variant-numeric:tabular-nums;
+}
+.dist-n.muted{font-size:.92rem;font-weight:600;color:var(--stone);letter-spacing:0;}
+.dist-addr{font-size:.8rem;color:var(--bone-2);}
+.distrow{flex-wrap:wrap;}
+.dist-note{flex:1 1 100%;margin:var(--s2) 0 0;font-size:.74rem;color:var(--stone);line-height:1.45;}
+
+.pairstrip{display:flex;gap:var(--s3);overflow-x:auto;scrollbar-width:none;padding-bottom:4px;}
+.pairstrip::-webkit-scrollbar{display:none;}
+.ps-item{
+  flex:0 0 232px;display:flex;flex-direction:column;gap:6px;
+  background:var(--surface-3);border:1px solid var(--line-2);
+  border-radius:var(--r-m);padding:6px;transition:border-color .2s;
+}
+.ps-item:hover{border-color:var(--bronze);}
+.ps-imgs{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.ps-imgs img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:var(--r-xs);}
+.ps-go{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  font-family:var(--font-cond);text-transform:uppercase;letter-spacing:.08em;
+  font-size:.74rem;font-weight:600;color:var(--sand);padding-bottom:2px;
+}
+
+.stagerow{display:flex;gap:var(--s2);overflow-x:auto;scrollbar-width:none;padding-bottom:4px;}
+.stagerow::-webkit-scrollbar{display:none;}
+.stg-item{
+  flex:0 0 96px;width:96px;height:96px;border-radius:var(--r-m);overflow:hidden;
+  border:1px solid var(--line-2);background:var(--surface-4);transition:border-color .2s;
+}
+.stg-item:hover{border-color:var(--bronze);}
+.stg-item img{width:100%;height:100%;object-fit:cover;}
+
+.gal-dots .dot{width:6px;height:6px;border-radius:50%;background:rgba(239,233,225,.4);
+  transition:width .25s,background .25s;pointer-events:auto;}
+.gal-dots .dot.on{background:var(--sand);width:20px;border-radius:var(--r-full);}
+.gal-slide{position:relative;}
+.gal-stage{
+  position:absolute;left:var(--s3);top:calc(var(--safe-t) + 60px);
+  background:rgba(18,16,14,.85);backdrop-filter:blur(8px);
+  font-family:var(--font-cond);text-transform:uppercase;letter-spacing:.09em;
+  font-size:.68rem;font-weight:700;padding:4px 10px;border-radius:var(--r-full);
+  color:var(--bone-2);
+}
+.gal-stage.st-before{color:var(--warn);}
+.gal-stage.st-after{color:var(--ok);}
+.gal-cap{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:var(--s6) var(--s4) 30px;
+  background:linear-gradient(180deg,rgba(18,16,14,0),rgba(18,16,14,.86));
+  font-size:.8rem;color:var(--bone-2);line-height:1.4;
+}
+.nophoto{
+  width:100%;height:100%;min-height:58px;display:grid;place-items:center;
+  background:var(--surface-4);color:var(--stone);font-size:.74rem;text-align:center;padding:8px;
+}
+.nophoto.tall{aspect-ratio:4/3;}
+
+.vis{font-size:.82rem;}
+.vis-private{color:var(--warn);}
+.vis-team,.vis-client{color:var(--bone-2);}
+.vis-public{color:var(--ok);}
+.tagv.sm{font-size:.74rem;padding:2px 9px;}
+.tagv.custom{background:transparent;border-style:dashed;}
+.tagv.free{background:transparent;border:1px dashed var(--line-2);color:var(--stone);font-style:italic;}
+.parsed-lbl{
+  flex:0 0 auto;font-family:var(--font-cond);text-transform:uppercase;
+  letter-spacing:.1em;font-size:.7rem;color:var(--stone);
+}
+.parsed > *{flex:0 0 auto;}
+.badge.pair{background:rgba(127,167,101,.18);color:var(--ok);border:1px solid rgba(127,167,101,.42);}
+.card.is-first{border-color:var(--bronze);
+  background:linear-gradient(135deg,rgba(196,135,63,.13),var(--surface-3) 62%);}
+.ico{display:inline-flex;align-items:center;}
+
+/* --- before / after presentation mode -----------------------------------
+   Full screen, black, no chrome. This is the screen a contractor turns
+   towards a customer, so nothing on it competes with the two photographs. */
+.compare{
+  position:absolute;inset:0;z-index:820;background:#000;
+  display:flex;flex-direction:column;
+  opacity:0;visibility:hidden;transition:opacity .28s;
+}
+.compare.open{opacity:1;visibility:visible;}
+.cmp-title{
+  font-family:var(--font-display);font-size:1rem;color:var(--bone);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:60%;
+}
+.cmp-stage{
+  flex:1 1 auto;position:relative;overflow:hidden;touch-action:none;
+  cursor:ew-resize;user-select:none;-webkit-user-select:none;background:#000;
+}
+/* `cover`, not `contain`. Two photographs of the same driveway are rarely
+   the same shape — one was taken in portrait, one landscape — and under
+   `contain` they sit at different sizes inside the frame, so wiping between
+   them compares a driveway with a black band. `cover` makes both fill the
+   same rectangle, which is the only way the wipe reads as one place before
+   and after. */
+.cmp-stage img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  pointer-events:none;-webkit-user-drag:none;
+}
+/* The clip is a clip-path so both photographs stay the same size and stay
+   registered — a width-based clip shrinks the one underneath and the seam
+   stops lining up with the handle. */
+.cmp-clip{position:absolute;inset:0;clip-path:inset(0 50% 0 0);}
+.cmp-handle{
+  position:absolute;top:0;bottom:0;left:50%;width:44px;margin-left:-22px;
+  display:grid;place-items:center;cursor:ew-resize;touch-action:none;
+}
+.cmp-handle::before{
+  content:"";position:absolute;top:0;bottom:0;left:21px;width:2px;
+  background:var(--sand);box-shadow:0 0 12px rgba(0,0,0,.8);
+}
+.cmp-handle i{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--sand);border:2px solid rgba(18,16,14,.35);
+  box-shadow:0 4px 18px rgba(0,0,0,.6);position:relative;
+}
+.cmp-handle i::before,.cmp-handle i::after{
+  content:"";position:absolute;top:50%;width:0;height:0;margin-top:-5px;
+  border-top:5px solid transparent;border-bottom:5px solid transparent;
+}
+.cmp-handle i::before{left:11px;border-right:7px solid var(--ink);}
+.cmp-handle i::after{right:11px;border-left:7px solid var(--ink);}
+.cmp-handle:focus-visible{outline:none;}
+.cmp-handle:focus-visible i{box-shadow:0 0 0 4px var(--bronze-dim),0 4px 18px rgba(0,0,0,.6);}
+.cmp-tag{
+  position:absolute;top:calc(var(--safe-t) + 70px);
+  background:rgba(18,16,14,.8);backdrop-filter:blur(8px);
+  font-family:var(--font-cond);text-transform:uppercase;letter-spacing:.12em;
+  font-size:.74rem;font-weight:700;padding:5px 12px;border-radius:var(--r-full);
+  color:var(--bone-2);pointer-events:none;
+}
+.cmp-tag.left{left:var(--s4);}
+.cmp-tag.right{right:var(--s4);}
+.cmp-foot{
+  flex:0 0 auto;display:flex;align-items:center;gap:var(--s3);
+  padding:var(--s3) var(--s4) calc(var(--s4) + var(--safe-b));
+  border-top:1px solid var(--line);background:var(--ink);
+}
+.cf-when{flex:1 1 auto;font-size:.82rem;color:var(--stone);
+  font-variant-numeric:tabular-nums;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.cf-n{font-size:.78rem;color:var(--bone-2);font-variant-numeric:tabular-nums;flex:0 0 auto;}
+.cmp-foot .btn{flex:0 0 auto;}
+body.presenting .topbar,body.presenting .searchwrap,body.presenting .railrow{display:none;}
+
+/* --- map fallback ------------------------------------------------------- */
+.mapfallback{
+  position:absolute;inset:0;display:grid;place-content:center;
+  text-align:center;padding:var(--s5);gap:var(--s2);
+}
+.mf-title{font-family:var(--font-display);font-size:1.1rem;color:var(--bone);margin:0;}
+.mf-body{font-size:.86rem;color:var(--stone);margin:0;max-width:34ch;}
+
+/* --- buttons the v2 flows use ------------------------------------------- */
+.btn-solid{background:var(--bronze);color:var(--ink);}
+.btn-solid:hover{background:var(--bronze-br);}
+.btn-on{background:var(--bronze-dim);border:1px solid var(--bronze);color:var(--sand);}
+.btn-wide{width:100%;}
+.btn.armed{background:rgba(190,90,70,.2);border-color:#E39585;color:#FFD6CC;}
+.btn-row.center{justify-content:center;}
+.btn-row.center .btn{flex:0 1 auto;}
+
+/* --- menus, stats, sets ------------------------------------------------- */
+.modal-lede{font-size:.9rem;color:var(--bone-2);margin:0 0 var(--s4);line-height:1.55;}
+.modal-lede.small{font-size:.8rem;color:var(--stone);}
+.modal-lede.warn{color:var(--warn);}
+.menu{display:flex;flex-direction:column;gap:var(--s2);}
+.menurow{
+  display:flex;align-items:center;gap:var(--s3);width:100%;text-align:left;
+  padding:var(--s3);border-radius:var(--r-m);
+  background:var(--surface-3);border:1px solid var(--line);color:var(--bone-2);
+  transition:border-color .2s,background .2s;
+}
+.menurow:hover{border-color:var(--bronze);background:var(--surface-4);}
+.menurow > span{flex:1 1 auto;min-width:0;}
+.menurow b{display:block;color:var(--bone);font-size:.96rem;font-weight:600;}
+.menurow span span{display:block;font-size:.78rem;color:var(--stone);line-height:1.4;}
+.menurow .ico:first-child{color:var(--bronze-br);}
+
+.stats{display:flex;gap:var(--s3);margin-bottom:var(--s4);}
+.stats > span{
+  flex:1 1 0;background:var(--surface-3);border:1px solid var(--line);
+  border-radius:var(--r-m);padding:var(--s3);text-align:center;
+}
+.stats b{display:block;font-family:var(--font-cond);font-size:1.5rem;
+  color:var(--sand);font-weight:700;line-height:1;font-variant-numeric:tabular-nums;}
+.stats i{display:block;font-style:normal;font-size:.72rem;color:var(--stone);margin-top:3px;}
+
+.setlist{display:flex;flex-direction:column;gap:var(--s2);}
+.setrow{display:flex;gap:var(--s2);align-items:stretch;}
+.setrow-main{
+  flex:1 1 auto;text-align:left;min-width:0;padding:var(--s3);
+  background:var(--surface-3);border:1px solid var(--line);
+  border-radius:var(--r-m);transition:border-color .2s;
+}
+.setrow-main:hover{border-color:var(--bronze);}
+.setrow-name{display:block;font-family:var(--font-display);font-size:1rem;color:var(--bone);}
+.setrow-meta{display:block;font-size:.76rem;color:var(--stone);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.setrow .btn{flex:0 0 auto;padding:10px 14px;min-height:0;font-size:.78rem;}
+
+/* --- import / pair review ----------------------------------------------- */
+.prog{padding:var(--s4) 0;}
+.prog-bar{height:6px;border-radius:var(--r-full);background:var(--surface-4);overflow:hidden;}
+.prog-bar i{display:block;height:100%;width:2%;background:var(--bronze);transition:width .2s linear;}
+.prog-txt{margin:var(--s3) 0 0;font-size:.84rem;color:var(--stone);text-align:center;}
+
+.review{display:flex;flex-direction:column;gap:var(--s3);}
+.review-head{margin-bottom:0;}
+.revcard{
+  display:flex;gap:var(--s3);padding:var(--s3);
+  background:var(--surface-3);border:1px solid var(--line);border-radius:var(--r-m);
+  transition:opacity .2s,border-color .2s;
+}
+.revcard.dropped{opacity:.42;}
+.rev-img{flex:0 0 108px;width:108px;display:flex;flex-direction:column;gap:6px;}
+.rev-img img{width:108px;height:108px;object-fit:cover;border-radius:var(--r-s);
+  background:var(--surface-4);}
+.rev-main{flex:1 1 auto;min-width:0;}
+.rev-main .field{margin-bottom:var(--s3);}
+.rev-file{
+  margin:0 0 6px;font-size:.78rem;color:var(--bone-2);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.rev-pair{flex:0 0 132px;width:132px;display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.rev-pair img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:var(--r-xs);}
+.why-stack{display:flex;flex-direction:column;gap:3px;margin-bottom:var(--s3);}
+.why{font-size:.75rem;line-height:1.4;color:var(--bone-2);}
+.why-high{color:var(--ok);}
+.why-mid{color:var(--sand);}
+.why-low{color:var(--warn);}
+.why-none{color:var(--warn);}
+.why.muted{color:var(--stone);font-variant-numeric:tabular-nums;}
+.keepwrap{display:inline-flex;align-items:center;gap:7px;font-size:.8rem;color:var(--bone-2);
+  cursor:pointer;padding:5px 2px;}
+.revcard .btn-row{align-items:center;gap:var(--s2);}
+.revcard .btn-row .btn{flex:0 0 auto;white-space:nowrap;}
+.keepwrap.wide{flex:1 1 auto;}
+.keepbox,.keepwrap input{width:20px;height:20px;accent-color:var(--bronze);flex:0 0 20px;}
+.pills.tight .pill{padding:6px 11px;font-size:.8rem;}
+
+/* --- project editor ----------------------------------------------------- */
+.editor .ed-h{
+  font-family:var(--font-cond);text-transform:uppercase;letter-spacing:.11em;
+  font-size:.82rem;color:var(--bronze-br);font-weight:600;
+  margin:var(--s5) 0 var(--s3);padding-top:var(--s3);border-top:1px solid var(--line);
+}
+.editor .ed-h:first-of-type{border-top:none;padding-top:0;}
+.two{display:flex;gap:var(--s3);}
+.two > *{flex:1 1 0;min-width:0;}
+.hint.coord{color:var(--sand);margin-top:var(--s2);}
+.coverpick{display:flex;gap:var(--s2);overflow-x:auto;scrollbar-width:none;padding-bottom:4px;}
+.coverpick::-webkit-scrollbar{display:none;}
+.cov{flex:0 0 74px;width:74px;height:74px;border-radius:var(--r-s);overflow:hidden;
+  border:2px solid transparent;opacity:.6;transition:opacity .2s,border-color .2s;}
+.cov img{width:100%;height:100%;object-fit:cover;}
+.cov.on{border-color:var(--bronze);opacity:1;}
+.logorow{display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap;}
+.logoprev{height:44px;width:auto;max-width:150px;object-fit:contain;
+  background:var(--surface-4);border-radius:var(--r-s);padding:4px 8px;}
+.logorow .btn{flex:0 0 auto;}
+.menurow.on{border-color:var(--bronze);background:var(--surface-4);}
+.menurow.on .ico:first-child{color:var(--ok);}
+
+/* --- wider screens ------------------------------------------------------
+   A laptop in a showroom or on a kitchen table. The sheet becomes a rail so
+   the map keeps its full width, and the panes get more columns.          */
+/* A laptop on a kitchen table. The results become a floating card down the
+   right-hand side so the map keeps its full width, and everything in the
+   header stack gets out of its way with a MARGIN — padding left the
+   bordered boxes of the notice and the collection bar drawn underneath
+   it. */
+@media (min-width:860px){
+  :root{--sheet-peek:0px;}
+  .sheet,.sheet.sh-peek,.sheet.sh-half,.sheet.sh-full{
+    left:auto;right:var(--s4);top:auto;bottom:var(--s4);width:394px;
+    height:calc(100% - var(--head-h,268px) - 28px);
+    max-height:calc(100% - var(--head-h,268px) - 28px);
+    border-radius:var(--r-xl);border:1px solid var(--line-2);
+    transform:none;box-shadow:-18px 0 50px rgba(0,0,0,.55);
+  }
+  .sheet.hidden{transform:translateX(100%);}
+  .sheet-grab{display:none;}
+  .sheet-head{padding-top:var(--s4);}
+
+  .topbar,.searchwrap,.railrow{padding-right:calc(394px + var(--s5));}
+  .collbar,.notice{margin-right:calc(394px + var(--s5));}
+  .viewpane{padding-left:var(--s5);padding-right:calc(394px + var(--s5));}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(212px,1fr));}
+
+  .detail{left:auto;width:520px;transform:translateX(100%);}
+  .detail.open{transform:translateX(0);}
+  .modal{align-items:center;}
+  .modal-panel{border-radius:var(--r-xl);max-height:86vh;}
+  .revcard{gap:var(--s4);}
+  .leaflet-control-zoom{margin-right:calc(394px + 24px)!important;}
+  /* With no map there is no reason for a rail; centre the list. */
+  body.no-map .sheet{right:auto;left:50%;transform:translateX(-50%);width:min(680px,92vw);}
+  body.no-map .topbar,body.no-map .searchwrap,body.no-map .railrow{padding-right:var(--s5);}
+  body.no-map .collbar,body.no-map .notice{margin-right:var(--s4);}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
 }
