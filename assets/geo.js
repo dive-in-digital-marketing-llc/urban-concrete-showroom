@@ -70,16 +70,6 @@ const Geo = (() => {
      of showing photographs of houses, not of this function.               */
   const CELL = 0.0022;     // degrees of latitude; ~800 ft
 
-  function hashSeed(str) {
-    let h = 2166136261;
-    const s = String(str || '');
-    for (let i = 0; i < s.length; i++) {
-      h ^= s.charCodeAt(i);
-      h = Math.imul(h, 16777619);
-    }
-    return (h >>> 0) / 4294967295;
-  }
-
   function blur(lat, lng) {
     if (!isFinite(lat) || !isFinite(lng)) return { lat, lng };
     const qLat = Math.round(lat / CELL) * CELL;
@@ -240,7 +230,7 @@ const Geo = (() => {
 
   return {
     milesBetween, fmtMiles, blur, visibleCoord, visibleAddress, streetOnly,
-    geocode, bounds, hashSeed, stateAbbrev,
+    geocode, bounds, stateAbbrev,
     VISIBILITY, VISIBILITY_LABEL, canView
   };
 })();
